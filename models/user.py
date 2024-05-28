@@ -45,3 +45,10 @@ class User(BaseModel, Base):
                 super().__setattr__(__name, m.hexdigest())
         else:
             super().__setattr__(__name, __value)
+
+    def to_dict(self):
+        """returns a dictionary containing all keys/values of the instance"""
+        new_dict = super().to_dict()
+        if 'password' in new_dict:
+            del new_dict['password']
+        return new_dict
