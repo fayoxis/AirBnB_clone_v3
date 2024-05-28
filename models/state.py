@@ -32,3 +32,12 @@ class State(BaseModel, Base):
                 if city.state_id == self.id:
                     city_list.append(city)
             return city_list
+
+    def to_dict(self):
+        """Converts the model instance to a dictionary"""
+        dict_rep = super().to_dict()
+        if models.storage_t == "db":
+            dict_rep['cities'] = [city.id for city in self.cities]
+        else:
+            dict_rep['cities'] = [city.id for city in self.cities]
+        return dict_rep
